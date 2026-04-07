@@ -19,25 +19,8 @@ document.body.appendChild(toastContainer);
 
 async function loadEnvAndInitSupabase() {
     try {
-        const response = await fetch('.env');
-        if (!response.ok) {
-           console.warn('Could not load .env file. Running without Supabase integration.');
-           return;
-        }
-        const text = await response.text();
-        const env = {};
-        text.split('\n').forEach(line => {
-            const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
-            if (match) {
-                let key = match[1];
-                let value = match[2] || '';
-                value = value.replace(/^(['"])(.*)\1$/, '$2');
-                env[key] = value.trim();
-            }
-        });
-        
-        const supabaseUrl = env['SUPABASE_URL'];
-        const supabaseKey = env['SUPABASE_ANON_KEY'];
+        const supabaseUrl = 'https://vfyqsldgdnlttsgdxqja.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmeXFzbGRnZG5sdHRzZ2R4cWphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NTIyMTEsImV4cCI6MjA5MTEyODIxMX0.5AOrYStbOt7XHkwLuH1w0GDPUvJovvcA54W2DZ553gI';
         
         if (supabaseUrl && supabaseKey && supabaseUrl.startsWith('http')) {
             if (window.supabase) {
